@@ -1,12 +1,13 @@
 import React, { useState } from 'react'
 import FilterSection from './FilterSection'
 import ProductCard from './ProductCard'
-import { Box, Divider, IconButton, useMediaQuery, useTheme } from '@mui/material';
+import { Box, Divider, IconButton, Pagination, useMediaQuery, useTheme } from '@mui/material';
 import { FilterAlt } from '@mui/icons-material';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import FilterSectionCheck from './FilterSectionCheck';
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
@@ -15,18 +16,31 @@ const Product = () => {
   const theme = useTheme();
   const isLarge = useMediaQuery(theme.breakpoints.up('lg'));
   const [sort, setSort] = useState();
+  const [page, setPage] = useState(1);
+
   const handleSortChange = (event: any) => {
     setSort(event.target.value);
   }
+
+  const handlePageChange = (value: number) => {
+    setPage(value)
+  }
   return (
     <div>
-      <div className='-z-10 mt-10'>
-        <h1 className='text-3xl text-primary-color font-bold text-center pb-5 px-9 uppercase space-x-2'>Đèn chùm LED hiện đại</h1>
+      <div className='-z-10 mt-1'>
+        <section className='pt-1 lg:px-20 pb-5 relative h-full lg:h-[400px] object-cover'>
+          <img
+            className='w-[12000px] h-full rounded-md transition-transform duration-300 ease-in-out hover:scale-95 cursor-pointer '
+            src="https://file.hstatic.net/200000058312/collection/den_chum_f22da3b2e557455f9c3bfd53653f819a.png"
+            alt=""
+          />
+        </section>
       </div>
 
       <div className='lg:flex lg:gap-5 px-5 lg:px-20'>
         <section className='filter_section hidden lg:block w-[20%]'>
           <FilterSection />
+          {/* <FilterSectionCheck /> */}
         </section>
 
         <div className='w-full lg:w-[80%] space-y-5'>
@@ -41,6 +55,7 @@ const Product = () => {
             {
               !isLarge && (<Box>
                 <FilterSection />
+                {/* <FilterSectionCheck /> */}
               </Box>)
             }
 
@@ -52,11 +67,12 @@ const Product = () => {
                 id="demo-simple-select"
                 value={sort}
                 label="Sắp xếp "
-                onChange={handleSortChange}
+                onChange={(e) => handleSortChange(e)}
               >
+
                 <MenuItem value={"price_low"}>Giá: Thấp - Cao</MenuItem>
                 <MenuItem value={"price_high"}>Giá: Cao - Thấp</MenuItem>
-                <MenuItem value={30}>Thirty</MenuItem>
+                <MenuItem value={30}>Mới nhất </MenuItem>
               </Select>
             </FormControl>
           </div>
@@ -65,7 +81,27 @@ const Product = () => {
           <section className='products_section grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-y-5 px-5 justify-center'>
             {[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1].map((item) => <ProductCard />)}
           </section>
-
+          <div className='flex justify-center py-12'>
+            <Pagination
+              onChange={(e, value) => handlePageChange(value)}
+              count={10}
+              variant="outlined"
+              shape="rounded"
+              sx={{
+                '& .MuiPaginationItem-root': {
+                  color: '#00927c',
+                  borderColor: '#00927c',
+                },
+                '& .Mui-selected': {
+                  backgroundColor: '#00927c',
+                  color: 'white',
+                  '&:hover': {
+                    backgroundColor: '#2e7d32',
+                  },
+                },
+              }}
+            />
+          </div>
         </div>
       </div>
 

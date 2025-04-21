@@ -5,6 +5,7 @@ import { ThemeProvider } from '@mui/material';
 import customTheme from './Theme/customTheme';
 import Home from './customers/pages/Home/Home';
 import Product from './customers/pages/Product/Product';
+import ProductDetails from './customers/pages/PageDetails/ProductDetails';
 const App = () => {
 
 
@@ -13,7 +14,8 @@ const App = () => {
       <div>
         <Navbar />
         {/* <Home /> */}
-        <Product />
+        {/* <Product /> */}
+        <ProductDetails />
       </div>
     </ThemeProvider>
   )

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import './ProductCard.css'
 import { Button } from '@mui/material';
-import { Favorite, ModeComment, ShoppingCart } from '@mui/icons-material';
+import { ModeComment, ShoppingCart } from '@mui/icons-material';
 import { teal } from '@mui/material/colors';
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
@@ -64,7 +64,7 @@ const ProductCard = () => {
         <div className='details pt-3 space-y-1 group-hover-effect rounded-md'>
           <div className='name'>
             <h1>Đèn Chùm LED </h1>
-            <p>Đèn trần LED auto</p>
+            <p>Đèn chùm LED auto</p>
 
           </div>
           <div className='price flex items-center gap-3'>
