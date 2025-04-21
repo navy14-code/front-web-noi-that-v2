@@ -6,6 +6,8 @@ import customTheme from './Theme/customTheme';
 import Home from './customers/pages/Home/Home';
 import Product from './customers/pages/Product/Product';
 import ProductDetails from './customers/pages/PageDetails/ProductDetails';
+import Review from './customers/pages/Review/Review';
+import Cart from './customers/pages/Cart/Cart';
 const App = () => {
 
 
@@ -13,9 +15,11 @@ const App = () => {
     <ThemeProvider theme={customTheme} >
       <div>
         <Navbar />
-        {/* <Home /> */}
-        {/* <Product /> */}
+        {/* <Home />
+        <Product />
         <ProductDetails />
+        <Review /> */}
+        <Cart />
       </div>
     </ThemeProvider>
   )

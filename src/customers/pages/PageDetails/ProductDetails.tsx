@@ -36,16 +36,17 @@ const ProductDetails = () => {
         <section>
           <h1 className='font-bold text-lg text-primary-color'>Đèn chùm</h1>
           <p className='text-gray-500 font-semibold'>Đèn chùm LED hiện đại</p>
-          <div className='flex justify-between items-center py-2 border w-[180px] px-3'>
+          <div className='flex justify-between items-center py-2 border w-[180px] px-3 mt-5'>
             <div className='flex gap-1 items-center'>
               <span>4,5</span>
               <StarIcon sx={{ color: yellow[800], fontSize: "17px" }} />
             </div>
             <Divider orientation='vertical' flexItem />
             <span>
-              234 Ratings
+              234 Đánh giá
             </span>
           </div>
+
           <div>
             <div className='price flex items-center gap-3 mt-5 text-2xl'>
 
@@ -172,8 +173,9 @@ const ProductDetails = () => {
 
           </div>
 
-          <div className='mt-7'>
+          <div className='mt-12 space-y-5'>
             <ReviewCard />
+            <Divider />
           </div>
 
 
@@ -188,28 +190,6 @@ const ProductDetails = () => {
         </div>
       </div>
     </div>
-    //  <div className='mt-10'>
-    //   <h2 className='text-xl font-semibold text-primary-color'>
-    //     Mô tả sản phẩm
-    //   </h2>
-    //   <p className='mt-3 text-gray-600'>
-    //     Đèn chùm đồng thường được thiết kế với hoa văn cầu kỳ, các chi tiết chạm khắc tinh xảo và một số loại còn được mạ vàng và trang trí thêm bằng pha lê cao cấp.
-    //     Đây là sản phẩm lý tưởng để trang trí không gian sống của bạn thêm sang trọng và ấm cúng.
-    //     Sản phẩm này có khả năng tiết kiệm năng lượng và tuổi thọ cao, phù hợp cho các phòng khách, phòng ăn, hoặc các không gian sang trọng khác.
-    //   </p>
-
-    //   <div className="mt-10">
-    //     <h2 className="text-xl font-semibold text-primary-color">Video Sản phẩm</h2>
-    //     <iframe
-    //       width="100%"  // Chiều rộng video (100% của phần chứa)
-    //       height="550px"  // Chiều cao video
-    //       src="https://www.youtube.com/embed/XbZhYaK55v8"
-    //       allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-    //       allowFullScreen
-    //     ></iframe>
-    //   </div>
-
-    // </div> 
   )
 }
 
