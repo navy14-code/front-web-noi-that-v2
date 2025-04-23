@@ -8,6 +8,8 @@ import Product from './customers/pages/Product/Product';
 import ProductDetails from './customers/pages/PageDetails/ProductDetails';
 import Review from './customers/pages/Review/Review';
 import Cart from './customers/pages/Cart/Cart';
+import Checkout from './customers/pages/Checkout/Checkout';
+import AddressFormS from './customers/pages/Checkout/AddressFormS';
 const App = () => {
 
 
@@ -18,8 +20,12 @@ const App = () => {
         {/* <Home />
         <Product />
         <ProductDetails />
-        <Review /> */}
+        <Review /> 
         <Cart />
+        */}
+        <Checkout />
+
+
       </div>
     </ThemeProvider>
   )

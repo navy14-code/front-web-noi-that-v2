@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import CartItem from './CartItem'
 import { Close, LocalOffer } from '@mui/icons-material'
 import { Button, IconButton, TextField } from '@mui/material'
+import PricingCard from './PricingCard'
 
 const Cart = () => {
 
@@ -29,7 +30,7 @@ const Cart = () => {
                             </div>
                             <span>Apply Voucher</span>
                         </div>
-                        {false ? <div className='flex gap-2 items-center '>
+                        {true ? <div className='flex gap-2 items-center '>
                             <TextField
                                 onChange={(e) => handleChange(e)}
                                 id='outlined-basic'
@@ -54,12 +55,42 @@ const Cart = () => {
                             : <div className='flex'>
                                 <div className='p-1 pl-5 border rounded-md flex gap-2 items-center'>
                                     <span className=''>Applied</span>
-                                    <IconButton size='small'>
+                                    <IconButton
+                                        size='small'
+                                        sx={{
+                                            '&:focus': {
+                                                outline: 'none',
+                                                boxShadow: 'none',
+                                            },
+                                        }}>
                                         <Close className='text-red-600' />
                                     </IconButton>
                                 </div>
                             </div>}
 
+                    </div>
+
+                    <div className='border rounded-md'>
+                        <PricingCard />
+                        <div className='p-5'>
+                            <Button
+                                fullWidth
+                                variant='contained'
+                                sx={{
+                                    py: "11px",
+                                    color: 'white',
+                                    border: 'none',
+                                    boxShadow: 'none',
+                                    background: '#00927c',
+                                    '&:focus': {
+                                        outline: 'none',
+                                        boxShadow: 'none',
+                                    }
+                                }}
+                            >
+                                Thanh Toán
+                            </Button>
+                        </div>
                     </div>
 
                 </div>
