@@ -6,7 +6,7 @@ import CategorySheet from './CategorySheet';
 import { mainCategory } from '../../../data/category/mainCategory';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { AddShoppingCart, Search } from '@mui/icons-material';
+import { AddShoppingCart, Login, Search, Storefront } from '@mui/icons-material';
 const Navbar = () => {
   // const [isLoggedIn, setIsLoggedIn] = useState(true);
   const theme = useTheme();
@@ -59,7 +59,7 @@ const Navbar = () => {
           <IconButton>
             <Search className="text-white" sx={{ fontSize: 30 }} />
           </IconButton>
-          {true ? (
+          {false ? (
             <Button
               onClick={() => navigate('/account/profile')}
               className="flex items-center gap-2"
@@ -71,15 +71,23 @@ const Navbar = () => {
               <h1 className="font-semibold hidden lg:block">Nam</h1>
             </Button>
           ) : (
-            <Button variant="contained">Login</Button>
+            <Button onClick={() => navigate('/login')} variant="contained">
+              Đăng nhập
+            </Button>
           )}
 
           <IconButton onClick={() => navigate('/cart')}>
             <AddShoppingCart className="text-white" sx={{ fontSize: 30 }} />
           </IconButton>
-          {/* {isLarge && <Button startIcon={<Storefront />} variant="outlined" className="bg-[#00927c] hover:bg-[#007f6b] text-white">
-                            Get Started
-                        </Button>} */}
+          {/* {isLarge && (
+            <Button
+              startIcon={<Storefront />}
+              variant="outlined"
+              className="bg-[#00927c] hover:bg-[#007f6b] text-white"
+            >
+              Login
+            </Button>
+          )} */}
         </div>
       </div>
       {showCategotySheet && (

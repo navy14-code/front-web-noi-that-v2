@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
-import FilterSection from './FilterSection'
-import ProductCard from './ProductCard'
+import React, { useState } from 'react';
+import FilterSection from './FilterSection';
+import ProductCard from './ProductCard';
 import { Box, Divider, IconButton, Pagination, useMediaQuery, useTheme } from '@mui/material';
 import { FilterAlt } from '@mui/icons-material';
 import InputLabel from '@mui/material/InputLabel';
@@ -11,7 +11,6 @@ import FilterSectionCheck from './FilterSectionCheck';
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-
 const Product = () => {
   const theme = useTheme();
   const isLarge = useMediaQuery(theme.breakpoints.up('lg'));
@@ -20,47 +19,46 @@ const Product = () => {
 
   const handleSortChange = (event: any) => {
     setSort(event.target.value);
-  }
+  };
 
   const handlePageChange = (value: number) => {
-    setPage(value)
-  }
+    setPage(value);
+  };
   return (
     <div>
-      <div className='-z-10 mt-1'>
-        <section className='pt-1 lg:px-20 pb-5 relative h-full lg:h-[400px] object-cover'>
+      <div className="-z-10 mt-1">
+        <section className="pt-1 lg:px-20 pb-5 relative h-full lg:h-[400px] object-cover">
           <img
-            className='w-[12000px] h-full rounded-md transition-transform duration-300 ease-in-out hover:scale-95 cursor-pointer '
+            className="w-[12000px] h-full rounded-md transition-transform duration-300 ease-in-out hover:scale-95 cursor-pointer "
             src="https://file.hstatic.net/200000058312/collection/den_chum_f22da3b2e557455f9c3bfd53653f819a.png"
             alt=""
           />
         </section>
       </div>
 
-      <div className='lg:flex lg:gap-5 px-5 lg:px-20'>
-        <section className='filter_section hidden lg:block w-[20%]'>
+      <div className="lg:flex lg:gap-5 px-5 lg:px-20">
+        <section className="filter_section hidden lg:block w-[20%]">
           <FilterSection />
           {/* <FilterSectionCheck /> */}
         </section>
 
-        <div className='w-full lg:w-[80%] space-y-5'>
-          <div className=' flex items-center justify-between px-9 h-[40px] '>
-            <div className='relative w-[50%]'>
-              {
-                !isLarge && (<IconButton>
+        <div className="w-full lg:w-[80%] space-y-5">
+          <div className=" flex items-center justify-between px-9 h-[40px] ">
+            <div className="relative w-[50%]">
+              {!isLarge && (
+                <IconButton>
                   <FilterAlt />
-                </IconButton>)
-              }
+                </IconButton>
+              )}
             </div>
-            {
-              !isLarge && (<Box>
+            {!isLarge && (
+              <Box className="block md:hidden">
                 <FilterSection />
                 {/* <FilterSectionCheck /> */}
-              </Box>)
-            }
+              </Box>
+            )}
 
-
-            <FormControl sx={{ width: "200px" }} size='small'>
+            <FormControl sx={{ width: '200px' }} size="small">
               <InputLabel id="demo-simple-select-label">Sắp xếp</InputLabel>
               <Select
                 labelId="demo-simple-select-label"
@@ -69,19 +67,20 @@ const Product = () => {
                 label="Sắp xếp "
                 onChange={(e) => handleSortChange(e)}
               >
-
-                <MenuItem value={"price_low"}>Giá: Thấp - Cao</MenuItem>
-                <MenuItem value={"price_high"}>Giá: Cao - Thấp</MenuItem>
+                <MenuItem value={'price_low'}>Giá: Thấp - Cao</MenuItem>
+                <MenuItem value={'price_high'}>Giá: Cao - Thấp</MenuItem>
                 <MenuItem value={30}>Mới nhất </MenuItem>
               </Select>
             </FormControl>
           </div>
 
           <Divider />
-          <section className='products_section grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-y-5 px-5 justify-center'>
-            {[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1].map((item) => <ProductCard />)}
+          <section className="products_section grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-y-5 px-5 justify-center">
+            {[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1].map((item) => (
+              <ProductCard />
+            ))}
           </section>
-          <div className='flex justify-center py-12'>
+          <div className="flex justify-center py-12">
             <Pagination
               onChange={(e, value) => handlePageChange(value)}
               count={10}
@@ -104,9 +103,8 @@ const Product = () => {
           </div>
         </div>
       </div>
-
     </div>
-  )
-}
+  );
+};
 
-export default Product
+export default Product;

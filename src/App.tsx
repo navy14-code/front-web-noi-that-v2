@@ -12,6 +12,7 @@ import Checkout from './customers/pages/Checkout/Checkout';
 import AddressFormS from './customers/pages/Checkout/AddressFormS';
 import Account from './customers/pages/Account/Account';
 import { Route, Routes } from 'react-router-dom';
+import Login from './customers/pages/Login/Login';
 const App = () => {
   return (
     <ThemeProvider theme={customTheme}>
@@ -19,6 +20,7 @@ const App = () => {
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
           <Route path="/products/:category" element={<Product />} />
           <Route
             path="/product-details/:categoryId/:name/:productId"
@@ -27,7 +29,7 @@ const App = () => {
           <Route path="/reviews/:productId" element={<Review />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/checkout" element={<Checkout />} />
-          <Route path="/account/profile" element={<Account />} />
+          <Route path="/account/*" element={<Account />} />
         </Routes>
       </div>
     </ThemeProvider>

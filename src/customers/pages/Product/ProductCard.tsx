@@ -40,6 +40,7 @@ const ProductCard = () => {
         >
           {images.map((item, index) => (
             <img
+              onClick={() => navigate('/product-details/:categoryId/:name/:productId')}
               className="card-media object-top"
               src={item}
               alt=""
