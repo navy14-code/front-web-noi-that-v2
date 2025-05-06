@@ -16,8 +16,6 @@ const LoginForm = () => {
   };
   const formik = useFormik({
     initialValues: {
-      name: '',
-      phone: '',
       email: '',
       password: '',
     },

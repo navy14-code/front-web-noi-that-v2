@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import LoginForm from './LoginForm';
 import RegisterForm from './RegisterForm';
+import ForgotPasswordForm from './ForgotPasswordForm';
 
 const Login = () => {
   const [isLogin, setIsLogin] = useState(true);
@@ -10,24 +11,35 @@ const Login = () => {
     setIsLogin(!isLogin);
     setIsForgotPassword(false);
   };
+  const handleForgotPassword = () => {
+    setIsForgotPassword(true); // bật form quên mật khẩu
+  };
 
   return (
-    <div className="grid md:gap-2 grid-cols-3 min-h-screen">
-      <section className=" lg:col-span-1 md:col-span-1 col-span-3 col-start-3 p-10 shadow-lg rounded-b-md">
-        {!isLogin ? <RegisterForm /> : <LoginForm />}
-
-        <div className="mt-12 space-y-2 text-center text-sm font-medium">
-          {isLogin ? 'Bạn chưa có tài khoản?' : 'Bạn đã có tài khoản?'}
-          <span onClick={handleShowPage} className="text-[#00927c] cursor-pointer hover:underline">
-            {isLogin ? 'Đăng ký' : 'Đăng nhập'}
-          </span>
-        </div>
+    <div className="grid grid-cols-1 md:grid-cols-2 min-h-screen bg-[#00927c]">
+      <section className="hidden md:flex justify-center items-center">
+        <img
+          className="w-full max-w-[300px] mx-auto lg:w-[400px]"
+          src="https://theme.hstatic.net/200000058312/1001080561/14/logo.png?v=472"
+          alt="logo"
+        />
       </section>
-      <section className="hidden md:col-span-1 lg:col-span-2 md:flex justify-center items-center">
-        <div className="lg:w-[70%] px-5 space-y-10">
-          <div className="space-y-3 font-bold text-center bg-primary-color">
-            <img className=" w-full max-w-[500px] mx-auto lg:w-[400px]" alt="" />
-          </div>
+
+      <section className="flex justify-center items-center">
+        <div className="p-10 shadow-lg rounded-md bg-white w-full max-w-[400px]">
+          {isForgotPassword ? <ForgotPasswordForm /> : isLogin ? <LoginForm /> : <RegisterForm />}
+
+          {!isForgotPassword && (
+            <div className="mt-12 space-y-2 text-center text-sm font-medium">
+              {isLogin ? 'Bạn chưa có tài khoản?' : 'Bạn đã có tài khoản?'}
+              <span
+                onClick={handleShowPage}
+                className="text-[#00927c] cursor-pointer hover:underline ml-1"
+              >
+                {isLogin ? 'Đăng ký' : 'Đăng nhập'}
+              </span>
+            </div>
+          )}
         </div>
       </section>
     </div>

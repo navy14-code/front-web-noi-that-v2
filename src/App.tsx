@@ -13,6 +13,7 @@ import AddressFormS from './customers/pages/Checkout/AddressFormS';
 import Account from './customers/pages/Account/Account';
 import { Route, Routes } from 'react-router-dom';
 import Login from './customers/pages/Login/Login';
+import AdminDashboard from './admin/pages/AdminDashboard/AdminDashboard';
 const App = () => {
   return (
     <ThemeProvider theme={customTheme}>
@@ -30,6 +31,7 @@ const App = () => {
           <Route path="/cart" element={<Cart />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/account/*" element={<Account />} />
+          <Route path="/admin/*" element={<AdminDashboard />} />
         </Routes>
       </div>
     </ThemeProvider>
