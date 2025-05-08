@@ -4,17 +4,11 @@ import { Button } from '@mui/material';
 import { ModeComment, ShoppingCart } from '@mui/icons-material';
 import { teal } from '@mui/material/colors';
 import { useNavigate } from 'react-router-dom';
+import { Product } from '../../../types/ProductTypes';
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-const images = [
-  'https://product.hstatic.net/200000058312/product/vlchpl-018_d67f6449a3434436baff70ccf800a65c_grande.png',
-  'https://product.hstatic.net/200000058312/product/vlchpl-017_90898b8c3d224a6b83e4294515b93e61_grande.jpg',
-  'https://product.hstatic.net/200000072226/product/0808008_58a160847f6a4e378b54550474c983ca_large.png',
-  'https://product.hstatic.net/200000058312/product/v75_33587a1fd7a44fc49a3f4fe5154ca4b3_grande.jpg',
-];
-
-const ProductCard = () => {
+const ProductCard = ({ item }: { item: Product }) => {
   const [currentImage, setCurrentImage] = useState(0); // mặc định là ảnh đầu tiên
   const [isHovered, setIsHovered] = useState(false); // trạng thái hover
   const navigate = useNavigate();
@@ -22,7 +16,7 @@ const ProductCard = () => {
     let interval: any;
     if (isHovered) {
       interval = setInterval(() => {
-        setCurrentImage((prevImage) => (prevImage + 1) % images.length); // tăng chỉ số ảnh hiện tại và quay lại đầu nếu vượt quá số lượng ảnh
+        setCurrentImage((prevImage) => (prevImage + 1) % item.images.length); // tăng chỉ số ảnh hiện tại và quay lại đầu nếu vượt quá số lượng ảnh
       }, 1000); // thay đổi ảnh sau mỗi .. giây
     } else if (interval) {
       clearInterval(interval); // dừng interval khi không hover
@@ -30,15 +24,21 @@ const ProductCard = () => {
     }
     return () => clearInterval(interval); // dọn dẹp interval khi component unmount hoặc khi isHovered thay đổi
   }, [isHovered]);
+
   return (
     <>
-      <div className="group px-4 relative">
+      <div
+        onClick={() =>
+          navigate(`/product-details/${item.category?.categoryId}/${item.title}/${item.id}`)
+        }
+        className="group px-4 relative"
+      >
         <div
           className="card"
           onMouseEnter={() => setIsHovered(true)} // khi hover vào card
           onMouseLeave={() => setIsHovered(false)} // khi rời khỏi card
         >
-          {images.map((item, index) => (
+          {item.images.map((item, index) => (
             <img
               onClick={() => navigate('/product-details/:categoryId/:name/:productId')}
               className="card-media object-top"
@@ -67,17 +67,19 @@ const ProductCard = () => {
         </div>
         <div className="details pt-3 space-y-1 group-hover-effect rounded-md">
           <div className="name">
-            <h1>Đèn Chùm LED </h1>
-            <p>Đèn chùm LED auto</p>
+            <h1> </h1>
+            <p>{item.title}</p>
           </div>
           <div className="price flex items-center gap-3">
             <span className="font-sans text-gray-800">
-              1.200.000<span className="text-gray-400 text-sm">đ</span>
+              {item.price}
+              <span className="text-gray-400 text-sm">đ</span>
             </span>
             <span className="thin-line-through text-gray-400">
-              1.500.000<span className="text-gray-400 text-sm">đ</span>
+              {item.discountPrice}
+              <span className="text-gray-400 text-sm">đ</span>
             </span>
-            <span className="discount text-red-500 font-semibold">20%</span>
+            <span className="discount text-red-500 font-semibold">{item.discountPercent}%</span>
           </div>
         </div>
       </div>

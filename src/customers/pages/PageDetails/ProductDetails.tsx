@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import StarIcon from '@mui/icons-material/Star';
 import { red, teal, yellow } from '@mui/material/colors';
 import { Button, Divider } from '@mui/material';
@@ -15,37 +15,47 @@ import {
 } from '@mui/icons-material';
 import SimilarProduct from './SimilarProduct';
 import ReviewCard from '../Review/ReviewCard';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import store, { useAppDispatch, useAppSelector } from '../../../State/Store';
+import { fetchProductById } from '../../../State/customer/ProductSlice';
 
 const ProductDetails = () => {
   const [quantity, setQuantity] = useState(1);
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+  const { productId } = useParams();
+  const { product } = useAppSelector((store) => store);
+  const [activeImage, setActiveImage] = useState(0);
 
+  // useEffect(()=>{
+  //   dispatch(fetchProductById(Number(productId)))
+  // },[productId])
+
+  const handleActiveImage = (value: number) => () => {
+    setActiveImage(value);
+  };
   return (
     <div className="px-5 lg:px-20 pt-10">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
         <section className="flex flex-col lg:flex-row gap-5">
           <div className="w-full lg:w-[15%] flex flex-wrap lg:flex-col gap-3">
-            {[1, 1, 1, 1].map((item) => (
+            {product.product?.images.map((item, index) => (
               <img
+                onClick={handleActiveImage(index)}
                 className="lg:w-full w-[50px] cursor-pointer rounded-md"
-                src="https://product.hstatic.net/200000058312/product/vlchdo-289-ab_10_65086b484dc3446db66d9c837c4a6be5_1024x1024.jpg"
+                src={item}
                 alt=""
               />
             ))}
           </div>
           <div className="w-full lg:w-[80%]">
-            <img
-              className="w-full rounded-md"
-              src="https://product.hstatic.net/200000058312/product/vlchpl-018_d67f6449a3434436baff70ccf800a65c_grande.png"
-              alt=""
-            />
+            <img className="w-full rounded-md" src={product.product?.images[activeImage]} alt="" />
           </div>
         </section>
 
         <section>
-          <h1 className="font-bold text-lg text-primary-color">Đèn chùm</h1>
-          <p className="text-gray-500 font-semibold">Đèn chùm LED hiện đại</p>
+          <h1 className="font-bold text-lg text-primary-color">{product.product?.title}</h1>
+          <p className="text-gray-500 font-semibold">{product.product?.description}</p>
           <div className="flex justify-between items-center py-2 border w-[180px] px-3 mt-5">
             <div className="flex gap-1 items-center">
               <span>4,5</span>
@@ -57,11 +67,13 @@ const ProductDetails = () => {
 
           <div>
             <div className="price flex items-center gap-3 mt-5 text-2xl">
-              <span className="font-sans text-gray-800">40,000,000 vnđ</span>
+              <span className="font-sans text-gray-800">{product.product?.discountPrice} vnđ</span>
 
-              <span className="line-through text-gray-500">100,000,000 vnđ</span>
+              <span className="line-through text-gray-500">{product.product?.price} vnđ</span>
 
-              <span className="text-primary-color font-semibold">60%</span>
+              <span className="text-primary-color font-semibold">
+                {product.product?.discountPercent}%
+              </span>
             </div>
             <p className="text-sm">Miễn phí vận chuyển cho tất cả các đơn hàng</p>
           </div>

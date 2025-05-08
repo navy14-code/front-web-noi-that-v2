@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 // import './App.css'
 import Navbar from './customers/component/Navbar/Navbar';
 import { ThemeProvider } from '@mui/material';
@@ -11,17 +11,35 @@ import Cart from './customers/pages/Cart/Cart';
 import Checkout from './customers/pages/Checkout/Checkout';
 import AddressFormS from './customers/pages/Checkout/AddressFormS';
 import Account from './customers/pages/Account/Account';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useNavigate } from 'react-router-dom';
 import Login from './customers/pages/Login/Login';
 import AdminDashboard from './admin/pages/AdminDashboard/AdminDashboard';
+import { fetchProducts } from './State/fetchProducts';
+import { useAppDispatch, useAppSelector } from './State/Store';
+import { fetchAdminProfile } from './State/admin/adminSlice';
+import Auth from './customers/pages/Auth/Auth';
 const App = () => {
+  const dispatch = useAppDispatch();
+  const { admin } = useAppSelector((store) => store);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    dispatch(fetchAdminProfile(localStorage.getItem('jwt') || ''));
+  }, []);
+
+  useEffect(() => {
+    if (admin.profile) {
+      navigate('/admin');
+    }
+  }, [admin.profile]);
+
   return (
     <ThemeProvider theme={customTheme}>
       <div>
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
+          <Route path="/login" element={<Auth />} />
           <Route path="/products/:category" element={<Product />} />
           <Route
             path="/product-details/:categoryId/:name/:productId"

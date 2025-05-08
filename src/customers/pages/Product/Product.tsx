@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import FilterSection from './FilterSection';
 import ProductCard from './ProductCard';
 import { Box, Divider, IconButton, Pagination, useMediaQuery, useTheme } from '@mui/material';
@@ -8,6 +8,9 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import FilterSectionCheck from './FilterSectionCheck';
+import store, { useAppDispatch, useAppSelector } from '../../../State/Store';
+import { fetchAllProducts } from '../../../State/customer/ProductSlice';
+import { useParams, useSearchParams } from 'react-router-dom';
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
@@ -16,6 +19,10 @@ const Product = () => {
   const isLarge = useMediaQuery(theme.breakpoints.up('lg'));
   const [sort, setSort] = useState();
   const [page, setPage] = useState(1);
+  const dispatch = useAppDispatch();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const { category } = useParams();
+  const { product } = useAppSelector((store) => store);
 
   const handleSortChange = (event: any) => {
     setSort(event.target.value);
@@ -24,6 +31,26 @@ const Product = () => {
   const handlePageChange = (value: number) => {
     setPage(value);
   };
+
+  useEffect(() => {
+    const [minPrice, maxPrice] = searchParams.get('price')?.split('-') || [];
+    const brand = searchParams.get('brand');
+    const minDiscount = searchParams.get('discount')
+      ? Number(searchParams.get('discount'))
+      : undefined;
+    const pageNumber = page - 1;
+
+    const newFilter = {
+      brand: brand || '',
+      minPrice: minPrice ? Number(minPrice) : undefined,
+      maxPrice: maxPrice ? Number(maxPrice) : undefined,
+      minDiscount,
+      pageNumber,
+    };
+
+    dispatch(fetchAllProducts(newFilter));
+  }, [category, searchParams]);
+
   return (
     <div>
       <div className="-z-10 mt-1">
@@ -76,8 +103,8 @@ const Product = () => {
 
           <Divider />
           <section className="products_section grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-y-5 px-5 justify-center">
-            {[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1].map((item) => (
-              <ProductCard />
+            {product.products.map((item) => (
+              <ProductCard item={item} />
             ))}
           </section>
           <div className="flex justify-center py-12">
